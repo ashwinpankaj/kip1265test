@@ -1,0 +1,64 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.apache.kafka.internal-api-checker' version '1.0.0-SNAPSHOT'
+}
+
+group = 'com.mycompany.app'
+version = '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+application {
+    mainClass = 'com.mycompany.app.App'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://repository.apache.org/content/repositories/snapshots/'
+    }
+    mavenLocal()
+}
+
+dependencies {
+    implementation 'org.apache.kafka:kafka-clients:4.3.0-SNAPSHOT'
+    implementation 'org.slf4j:slf4j-simple:1.7.36'
+
+    testImplementation 'junit:junit:4.11'
+}
+
+// Configure encoding
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+// Task to run the application (equivalent to Maven exec:java)
+task runApp(type: JavaExec) {
+    group = 'application'
+    description = 'Run the Kafka producer application'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.mycompany.app.App'
+}
+
+// Configure test task
+test {
+    useJUnit()
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+    }
+}
+
+kafkaInternalApiChecker {
+    // Configuration for the internal API checker plugin
+    failOnViolation = true
+    reportFile = file("$buildDir/reports/internal-api-checker/report.txt")
+}

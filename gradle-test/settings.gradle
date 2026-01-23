@@ -1,0 +1,12 @@
+pluginManagement {
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
+        maven {
+            url 'https://repository.apache.org/content/repositories/snapshots/'
+        }
+    }
+}
+
+rootProject.name = 'kip1265test-gradle'
+include 'my-simple-app'

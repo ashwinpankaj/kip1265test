@@ -1,0 +1,11 @@
+pluginManagement {
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
+        maven {
+            url 'https://repository.apache.org/content/repositories/snapshots/'
+        }
+    }
+}
+
+rootProject.name = 'my-simple-app'

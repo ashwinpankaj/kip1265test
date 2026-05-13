@@ -50,11 +50,12 @@
           <!-- Fail build on violations (default: true) -->
           <failOnViolation>true</failOnViolation>
 
-          <!-- Source directories to scan -->
-          <sourceDirectories>
-            <sourceDirectory>src/main/java</sourceDirectory>
-            <sourceDirectory>src/test/java</sourceDirectory>
-          </sourceDirectories>
+          <!-- Compiled-class directories to scan. Defaults to ${project.build.outputDirectory}
+               and ${project.build.testOutputDirectory} when omitted. -->
+          <classesDirectories>
+            <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+            <classesDirectory>${project.build.testOutputDirectory}</classesDirectory>
+          </classesDirectories>
 
           <!-- Report file location -->
           <reportFile>${project.build.directory}/reports/kafka-internal-api-usage.txt</reportFile>
